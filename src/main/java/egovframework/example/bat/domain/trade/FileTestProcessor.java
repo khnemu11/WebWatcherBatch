@@ -34,27 +34,29 @@ import org.springframework.batch.item.ItemProcessor;
  *  2012. 07.25  배치실행개발팀     최초 생성
  *      </pre>
  */
-public class CustomerCreditIncreaseProcessor implements ItemProcessor<CustomerCredit, CustomerCredit> {
-	// 증가할 수
-	public static final BigDecimal FIXED_AMOUNT = new BigDecimal("5");
+public class FileTestProcessor implements ItemProcessor<FileVO, ResultVO> {
 
 	/**
 	 * FIXED_AMOUNT만큼 증가 시킨 후 return
 	 */
 	@Override
-	public CustomerCredit process(CustomerCredit item) throws Exception {
-		TestCase test = new TestCase();
-		FileVO file = new FileVO();
-		file.setFileName("SCENARIO_202210110431327940");
+	public ResultVO process(FileVO item) throws Exception {
+		System.out.println("Start "+item.toString());
 		
+		ResultVO result = new ResultVO();
+	
+		
+		TestCase test = new TestCase();
 		try {
 			test.setUp();
-			ResultVO result = test.testTestCase(file);
+			result = test.testTestCase(item);
 			test.tearDown();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return item.increaseCreditBy(FIXED_AMOUNT);
+		
+		result.setSiteSeq(item.getSiteSeq());
+		System.out.println(result.toString());
+		return result;
 	}
 }

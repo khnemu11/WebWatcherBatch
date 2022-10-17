@@ -16,10 +16,6 @@
 
 package egovframework.example.bat.domain.trade;
 
-import java.math.BigDecimal;
-
-import org.springframework.batch.item.ItemProcessor;
-
 /**
  * @author 배치실행개발팀
  * @since 2012. 07.25
@@ -34,27 +30,29 @@ import org.springframework.batch.item.ItemProcessor;
  *  2012. 07.25  배치실행개발팀     최초 생성
  *      </pre>
  */
-public class CustomerCreditIncreaseProcessor implements ItemProcessor<CustomerCredit, CustomerCredit> {
-	// 증가할 수
-	public static final BigDecimal FIXED_AMOUNT = new BigDecimal("5");
 
-	/**
-	 * FIXED_AMOUNT만큼 증가 시킨 후 return
-	 */
+public class FileVO {
+	int siteSeq;
+	String fileId;
+
+	public int getSiteSeq() {
+		return siteSeq;
+	}
+
+	public void setSiteSeq(int siteSeq) {
+		this.siteSeq = siteSeq;
+	}
+
+	public String getFileName() {
+		return fileId;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileId = fileName;
+	}
+
 	@Override
-	public CustomerCredit process(CustomerCredit item) throws Exception {
-		TestCase test = new TestCase();
-		FileVO file = new FileVO();
-		file.setFileName("SCENARIO_202210110431327940");
-		
-		try {
-			test.setUp();
-			ResultVO result = test.testTestCase(file);
-			test.tearDown();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return item.increaseCreditBy(FIXED_AMOUNT);
+	public String toString() {
+		return "File [siteSeq=" + siteSeq + ", fileId=" + fileId + "]";
 	}
 }

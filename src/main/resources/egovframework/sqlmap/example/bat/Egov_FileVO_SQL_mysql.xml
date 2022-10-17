@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="File">
+	<resultMap id="file"
+		class="egovframework.example.bat.domain.trade.FileVO">
+		<result property="siteSeq" column="SITE_SEQ" />
+		<result property="fileId" column="FILE_ID" />
+	</resultMap>
+
+	<select id="getAllFiles" resultMap="file">
+		SELECT site.seq as SITE_SEQ, comtnfiledetail.STRE_FILE_NM as FILE_ID FROM comtnfiledetail, site 
+			WHERE comtnfiledetail.ATCH_FILE_ID = site.file_id AND site.dtime = 0 AND site.ddate = 0
+	</select>
+</sqlMap>

@@ -16,45 +16,42 @@
 
 package egovframework.example.bat.domain.trade;
 
-import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import org.springframework.batch.item.ItemProcessor;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  * @author 배치실행개발팀
  * @since 2012. 07.25
  * @version 1.0
  * @see
- * 
- *      <pre>
+ *  <pre>
  *      개정이력(Modification Information)
  *
  *   수정일      수정자           수정내용
  *  ------- -------- ---------------------------
  *  2012. 07.25  배치실행개발팀     최초 생성
- *      </pre>
+ *  </pre>
  */
-public class CustomerCreditIncreaseProcessor implements ItemProcessor<CustomerCredit, CustomerCredit> {
-	// 증가할 수
-	public static final BigDecimal FIXED_AMOUNT = new BigDecimal("5");
 
-	/**
-	 * FIXED_AMOUNT만큼 증가 시킨 후 return
-	 */
+public class FileRowMapper implements RowMapper<Object> {
+
+	// "site_seq"를 나타내는 상수
+	public static final String SITESEQ_COLUMN = "SITE_SEQ";
+
+	// "file_id"를 나타내는 상수
+	public static final String FILEID_COLUMN = "file_id";
+
+	
 	@Override
-	public CustomerCredit process(CustomerCredit item) throws Exception {
-		TestCase test = new TestCase();
+	public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 		FileVO file = new FileVO();
-		file.setFileName("SCENARIO_202210110431327940");
-		
-		try {
-			test.setUp();
-			ResultVO result = test.testTestCase(file);
-			test.tearDown();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
-		return item.increaseCreditBy(FIXED_AMOUNT);
+		file.setSiteSeq(rs.getInt(SITESEQ_COLUMN));
+		file.setFileName(rs.getString(FILEID_COLUMN));
+
+		return file;
 	}
+
 }

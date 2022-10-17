@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Result">
+	<insert id="insertResult" parameterClass="egovframework.example.bat.domain.trade.ResultVO" >
+  		insert into TEST_RESULT(site_seq, result, resptime,resulttext, version, cdate,ctime) 
+  			VALUES (
+  					#siteSeq#, #result#,#resptime#,#resulttext#,1,#cdate#,#ctime#
+  				)
+  	</insert>
+</sqlMap>

@@ -16,18 +16,18 @@
 		</step>
 	</job>
 	<bean id="ibatisToIbatisJob.ibatisToIbatisStep.ibatisItemReader" class="org.springframework.batch.item.database.IbatisPagingItemReader">
-		<property name="queryId" value="getAllCustomerCredits" />
+		<property name="queryId" value="getAllFiles" />
 		<property name="sqlMapClient" ref="sqlMapClient" />
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 
 	<bean id="ibatisToIbatisJob.ibatisToIbatisStep.ibatisItemWriter" class="org.springframework.batch.item.database.IbatisBatchItemWriter">
-		<property name="statementId" value="updateCredit" />
+		<property name="statementId" value="insertResult" />
 		<property name="sqlMapClient" ref="sqlMapClient" />
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<bean id="ibatisToIbatisJob.ibatisToIbatisStep.itemProcessor" class="egovframework.example.bat.domain.trade.CustomerCreditIncreaseProcessor" />
+	<bean id="ibatisToIbatisJob.ibatisToIbatisStep.itemProcessor" class="egovframework.example.bat.domain.trade.FileTestProcessor" />
 
 </beans>
