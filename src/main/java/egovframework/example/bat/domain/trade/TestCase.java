@@ -111,18 +111,7 @@ public class TestCase {
 //			driver.findElement(By.xpath("//button[@onclick='login(this.form)']")).click();
 //			assertEquals("test님 환영합니다.", closeAlertAndGetItsText());
 //			driver.get("https://ksh-starbucks-clone.herokuapp.com/index");
-			LocalDateTime end = LocalDateTime.now();
-			long resptime = ChronoUnit.MILLIS.between(start, end);
-			System.out.println("resp time : " + resptime);
-			result.setResptime((int) resptime);
 
-			DateTimeFormatter dateformat = DateTimeFormatter.ofPattern("yyyyMMdd").withLocale(Locale.KOREA)
-					.withZone(ZoneOffset.UTC);
-			DateTimeFormatter timeformat = DateTimeFormatter.ofPattern("HHmmss").withLocale(Locale.KOREA)
-					.withZone(ZoneOffset.UTC);
-
-			result.setCdate(Integer.valueOf(start.format(dateformat)));
-			result.setCtime(Integer.valueOf(start.format(timeformat)));
 		} catch (Exception e) {
 			driver.close();
 			String errormsg = e.getMessage();
@@ -132,7 +121,19 @@ public class TestCase {
 			result.setResulttext(shortMsg);
 
 		}
+		LocalDateTime end = LocalDateTime.now();
+		long resptime = ChronoUnit.MILLIS.between(start, end);
+		System.out.println("resp time : " + resptime);
+		result.setResptime((int) resptime);
 
+		DateTimeFormatter dateformat = DateTimeFormatter.ofPattern("yyyyMMdd").withLocale(Locale.KOREA)
+				.withZone(ZoneOffset.UTC);
+		DateTimeFormatter timeformat = DateTimeFormatter.ofPattern("HHmmss").withLocale(Locale.KOREA)
+				.withZone(ZoneOffset.UTC);
+
+		result.setCdate(Integer.valueOf(start.format(dateformat)));
+		result.setCtime(Integer.valueOf(start.format(timeformat)));
+		
 		if (shortMsg.equals("")) {
 			result.setResult("TRUE");
 			System.out.println("success!");

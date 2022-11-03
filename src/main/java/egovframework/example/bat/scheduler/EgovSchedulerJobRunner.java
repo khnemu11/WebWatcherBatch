@@ -48,8 +48,8 @@ public class EgovSchedulerJobRunner {
 		 * delayTime: Scheduler 실행을 위해 ApplicationContext를 종료를 지연시키는 시간(실행시간)
 		 *            (기본 30000 milliseconds: 30초)
 		 */
-		EgovSchedulerRunner egovSchedulerRunner = new EgovSchedulerRunner("/egovframework/batch/context-batch-scheduler.xml", "/egovframework/batch/context-scheduler-job.xml",
-				jobPaths, 600000);
-		egovSchedulerRunner.start();
+			EgovSchedulerRunner egovSchedulerRunner = new EgovSchedulerRunner("/egovframework/batch/context-batch-scheduler.xml", "/egovframework/batch/context-scheduler-job.xml",
+					jobPaths, 300000);
+			egovSchedulerRunner.start();
 	}
 }
